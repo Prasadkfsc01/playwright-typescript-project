@@ -13,8 +13,8 @@ docker run -it -v $PWD:/e2e -w /e2e playwright/included:latest
 - Or you can build an image and run the docker file as per your requirements. Make sure you have Docker installed and running.
 
 ```
-docker build -t myImage .
-docker run myImage
+docker build -t myimage .
+docker run myimage
 ```
 
 - For more options and configurations, refer to Docker’s official documentation. This setup ensures a consistent testing environment across different machines.
