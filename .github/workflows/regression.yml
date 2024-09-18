@@ -1,0 +1,65 @@
+name: Playwright Regression Test Suite
+
+on:
+  schedule:
+    # Runs at midnight every day.
+    - cron: "0 0 * * *"
+
+jobs:
+  Playwright-run:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      actions: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "21.x"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libnss3 libgtk-3-0 libgbm-dev libasound2
+
+      - name: Install Playwright and dependencies
+        run: npm install @playwright/test playwright
+
+      - name: Run Playwright tests
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: npm run test
+
+      - name: Check if reports directory exists
+        run: if [ -d "reports" ]; then echo "Directory exists"; else echo "Directory does not exist"; fi
+
+      - name: Store Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Reports
+          path: playwright-report
+
+      - name: Send notification to Slack on success
+        uses: rtCamp/action-slack-notify@v2
+        if: success()
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_USERNAME: Orange Bot
+          SLACK_TITLE: Playwright Regression Suite
+          SLACK_MESSAGE: "Playwright regression suite passed :rocket:"
+          SLACK_COLOR: good
+
+      - name: Send notification to Slack on failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_USERNAME: Orange Bot
+          SLACK_TITLE: Playwright Regression Suite
+          SLACK_MESSAGE: "Playwright regression tests failed ❌"
+          SLACK_COLOR: danger
