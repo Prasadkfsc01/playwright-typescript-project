@@ -1,0 +1,6 @@
+# Ignore build artifacts and static files
+build/** linguist-vendored
+dist/** linguist-vendored
+public/** linguist-vendored
+*.html linguist-vendored
+*.css linguist-vendored

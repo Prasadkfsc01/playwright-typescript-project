@@ -12,3 +12,7 @@ src/.DS_Store
 src/actions/.DS_Store
 src/pages/.DS_Store
 src/utils/.DS_Store
+node_modules/
+dist/
+build/
+*.html
