@@ -1,9 +1,9 @@
-name: Playwright Regression Test Suite
+name: Playwright smoke-test Test Suite
 
 on:
-  schedule:
-    # Runs at midnight every day.
-    - cron: "0 0 * * *"
+  push:
+    branches:
+      - main
 
 jobs:
   Playwright-run:
@@ -33,7 +33,7 @@ jobs:
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
-        run: npm run test
+        run: npm run smoke-test
 
       # - name: Check if reports directory exists
       #   run: if [ -d "reports" ]; then echo "Directory exists"; else echo "Directory does not exist"; fi
@@ -50,8 +50,8 @@ jobs:
       #   env:
       #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
       #     SLACK_USERNAME: Orange Bot
-      #     SLACK_TITLE: Playwright Regression Suite
-      #     SLACK_MESSAGE: "Playwright regression suite passed :rocket:"
+      #     SLACK_TITLE: Playwright smoke-test Suite
+      #     SLACK_MESSAGE: "Playwright smoke-test suite passed :rocket:"
       #     SLACK_COLOR: good
 
       # - name: Send notification to Slack on failure
@@ -60,6 +60,6 @@ jobs:
       #   env:
       #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
       #     SLACK_USERNAME: Orange Bot
-      #     SLACK_TITLE: Playwright Regression Suite
-      #     SLACK_MESSAGE: "Playwright regression tests failed ❌"
+      #     SLACK_TITLE: Playwright smoke-test Suite
+      #     SLACK_MESSAGE: "Playwright smoke-test tests failed ❌"
       #     SLACK_COLOR: danger

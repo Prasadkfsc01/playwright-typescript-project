@@ -5,6 +5,7 @@
   "scripts": {
     "test": "npx playwright test --project chromium",
     "test:headed": "npx playwright test --headed --project chromium",
+    "smoke-test": "npx playwright test --project chromium",
     "report": "npx playwright show-report"
   },
   "keywords": [],
