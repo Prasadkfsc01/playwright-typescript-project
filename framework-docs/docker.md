@@ -1,11 +1,11 @@
 ## Docker
 
-### Running Cypress Tests in Docker
+### Running playwright Tests in Docker
 
-- You can run your Cypress e2e fodler tests inside a isolated Docker container, use the following command. its a default cypress image.
+- You can run your playwright e2e fodler tests inside a isolated Docker container, use the following command. its a default playwright image.
 
 ```
-docker run -it -v $PWD:/e2e -w /e2e cypress/included:latest
+docker run -it -v $PWD:/e2e -w /e2e playwright/included:latest
 ```
 
 - Or you can run on codespace as well in github to smoke test your tests.

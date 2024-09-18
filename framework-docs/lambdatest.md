@@ -1,35 +1,106 @@
-## LambdaTest set up process
+## LambdaTest Setup Process for Playwright
 
-- Create a lambda test user access and get username and access key handy before process [see sample attached screenshot].
-- Make sure Installing the LambdaTest CLI package using the below command:
+### 1. Create LambdaTest Account
 
-```
-  npm install -g lambdatest-cypress-cli
-```
+- **Create a LambdaTest account** and get your `username` and `access key`. This information will be required for configuring the tests.
 
-- Setup the configuration, run below command which will add a config file in your project `lambdatest-config.json`
+### 2. Install LambdaTest CLI Package
 
-```
-lambdatest-cypress init
-```
+Install the LambdaTest CLI package using the following command:
 
-- Now open config file and add your username and access_key. Add any configuration you need, device, browser, OS combos
-- Update you specs path in the `lambdatest-config.json` like below
-
-```
-"specs": "cypress/e2e/spec.cy.js",
+```bash
+npm install -g lambdatest-playwright-cli
 ```
 
-- run below command to run your test cases
+### 3. Initialize LambdaTest Configuration
 
+Initialize the LambdaTest configuration, which will create a `lambdatest-config.json` file in your project:
+
+```bash
+lambdatest-playwright init
 ```
-lambdatest-cypress run
+
+### 4. Configure `lambdatest-config.json`
+
+Open the `lambdatest-config.json` file and update it with your LambdaTest credentials and desired configuration settings. For example:
+
+- **Add your LambdaTest `username` and `access_key`**
+- **Configure desired capabilities** (device, browser, OS combos)
+- **Update the `specs` path** to point to your Playwright tests
+
+Here’s an example of what your `lambdatest-config.json` might look like:
+
+```json
+{
+  "username": "YOUR_LAMBDATEST_USERNAME",
+  "access_key": "YOUR_LAMBDATEST_ACCESS_KEY",
+  "specs": "playwright-tests/**/*.spec.ts",
+  "browsers": [
+    {
+      "browser": "chrome",
+      "browser_version": "latest",
+      "os": "Windows",
+      "os_version": "10"
+    }
+    // Add other browser/device configurations as needed
+  ]
+}
 ```
 
-**_If you come across error about config file, just remove the below line from lambda config file_**
+### 5. Run Your Tests
 
-` "cypress_config_file": "cypress.config.js",`
+Use the LambdaTest CLI to run your Playwright tests:
+
+```bash
+lambdatest-playwright run
+```
+
+### 6. Troubleshooting
+
+**If you encounter errors related to configuration files:**
+
+- Ensure that the `lambdatest-config.json` file is correctly formatted and includes the correct paths and credentials.
+- Remove or adjust any specific configurations that may not be necessary for your setup.
 
 ### Screenshots
 
-<img width="693" alt="Screenshot 2024-04-12 at 13 45 23" src="https://github.com/Prasadkfsc01/process-Documentations/assets/98956122/756bc9b2-14b6-4c24-8223-6a6708327b9c">
+For visual references and additional details, you can refer to LambdaTest’s documentation or sample screenshots similar to those provided for Playwright.
+
+### Example `lambdatest-config.json` (Playwright)
+
+Here’s an example configuration for a Playwright setup:
+
+```json
+{
+  "username": "YOUR_LAMBDATEST_USERNAME",
+  "access_key": "YOUR_LAMBDATEST_ACCESS_KEY",
+  "specs": "playwright-tests/**/*.spec.ts",
+  "browsers": [
+    {
+      "browser": "chrome",
+      "browser_version": "latest",
+      "os": "Windows",
+      "os_version": "10"
+    },
+    {
+      "browser": "firefox",
+      "browser_version": "latest",
+      "os": "Windows",
+      "os_version": "10"
+    },
+    {
+      "browser": "safari",
+      "browser_version": "latest",
+      "os": "Mac",
+      "os_version": "Big Sur"
+    }
+  ]
+}
+```
+
+### Additional Notes
+
+- Ensure you have the LambdaTest CLI tools installed and configured properly.
+- Check LambdaTest documentation for any updates or additional configuration options.
+
+By following these steps, you can integrate LambdaTest with Playwright and run your tests across various browsers and devices on LambdaTest’s cloud infrastructure.
